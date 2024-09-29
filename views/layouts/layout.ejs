@@ -4,6 +4,7 @@
     <%- include('../partials/head') %>
 </head>
 <body>
+<div class="bodyContainer">
     <header>
         <%- include('../partials/header') %>
     </header>
@@ -13,10 +14,69 @@
     
     <main>
         <%- body %> <!-- This is where the content of each view will be injected -->
+        <section class="deloreanSection">
+            <h1>Welcome to CSE Motors!</h1>
+            <div>
+                <h1>DMC Delorean</h1>
+                <p>3 Cupholders</p>
+                <p>Superman doors</p>
+                <p>Fuzzy dice!</p>
+                <img src="images/site/own_today.png" alt="own today">
+            </div>
+            <img class="deloreanImage" src="images/vehicles/delorean.jpg" alt="car image"> 
+        </section>
+        <div class="homeMain">
+
+            <!-- Upgrades section -->
+            <aside>
+                <h2>Delorean Upgrades</h2>
+                <div class="upgradesGrid">
+
+                    <!-- Upgrades section 1 -->
+                    <div class="upgradesGridItem">
+                        <div class="upgradeImg"><img src="images/upgrades/flux-cap.png" alt="flux image"></div>
+                        <p>Flux Capacitor</p>
+                    </div>
+
+                    <!-- Upgrades section 2 -->
+                    <div class="upgradesGridItem">
+                        <div class="upgradeImg"><img src="images/upgrades/flame.jpg" alt="flame image"></div>
+                        <p>Flame Decals</p>
+                    </div>
+                    
+                    <!-- Upgrades section 3 -->
+                    <div class="upgradesGridItem">
+                        <div class="upgradeImg"><img src="images/upgrades/bumper_sticker.jpg" alt="bumper sticker image"></div>
+                        
+                        <p>Bimper Stickers</p>
+                    </div>
+
+                    <!-- Upgrades section 4 -->
+                    <div class="upgradesGridItem">
+                        <div class="upgradeImg" ><img src="images/upgrades/hub-cap.jpg" alt="hub cap image"></div>
+                        <p>Hub Caps</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!--  Reviews section -->
+            <aside class="reviews">
+                <h2>DMC Delorean Reviews</h2>
+                <div>
+                    <li> "So fast it's almost like traveling in time." (4/5)</li>
+                    <li>"Cooest ride on the road.(4/5)"</li>
+                    <li>"I'm feeling McFly!" (5/5)</li>
+                    <li>"The most futuristic ride of our day." (4.5/5)</li>
+                    <li>"80's livin and I love it!" (5/5)</li>
+                </div>
+                
+            </aside>
+        </div>
     </main>
 
     <footer>
         <%- include('../partials/footer') %>
     </footer>
+</div>
 </body>
 </html>
