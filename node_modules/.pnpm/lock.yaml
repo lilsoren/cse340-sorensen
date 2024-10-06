@@ -28,7 +28,7 @@ importers:
         specifier: ^3.1.0
         version: 3.1.6
       sass:
-        specifier: ^1.79.3
+        specifier: ^1.79.4
         version: 1.79.4
       ws:
         specifier: ^8.18.0
