@@ -1,4 +1,4 @@
 {    
     "ext": "scss,js,ejs,json",    
-    "exec": "sass --style=compressed scss/main.scss public/css/main.css && node server.js"
+    "exec": "sass --style=compressed css/styles.scss public/css/styles.css && node server.js"
 } 
