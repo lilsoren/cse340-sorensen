@@ -6,32 +6,25 @@ require("dotenv").config()
  * But will cause problems in production environment
  * If - else will make determination which to use
  * *************** */
-let pool
-if (process.env.NODE_ENV == "development") {
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-})
+const pool = new Pool({    
+  connectionString: process.env.DB_URL,    
+  ssl: false
+});
 
-// Added for troubleshooting queries
-// during development
-module.exports = {
-  async query(text, params) {
-    try {
-      const res = await pool.query(text, params)
-      console.log("executed query", { text })
-      return res
-    } catch (error) {
-      console.error("error in query", { text })
-      throw error
+if (process.env.NODE_ENV.toLowerCase().includes('dev')) {    
+  /**     * Instead of giving the user the original pool object, we can create a     * wrapper that allows us to control what actions the user can take on the     * pool. In this case, we only want the user to be able to query the pool     * and we want to automatically log all queries that are executed.     */    
+  module.exports = {        
+    async query(text, params) {            
+      try {                
+        const res = await pool.query(text, params);                
+        console.log('Executed query:', { text });                
+        return res;            
+    } catch (error) {                
+        console.error('Error in query:', { text });                
+        throw error;            
+    }        
+  }    
+};
+} else {    // We are in production, so we can just export the pool object directly.    
+  module.exports = pool;
     }
-  },
-}
-} else {
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-  })
-  module.exports = pool
-}

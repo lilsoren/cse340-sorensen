@@ -12,6 +12,9 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const { Pool } = require('pg');
+const inventoryRoute = require("./routes/inventoryRoute")
+const utilities = require("./utilities/");
+
 
 /* ***********************
  * View Engine and Templates    ROUTES
@@ -24,7 +27,13 @@ app.use(static)
 // Index route 
 app.get("/", baseController.buildHome)
 
-/*  THIS DOESN'T AACTUALLY BELONG HERE  */
+// Inventory routes
+app.use("/inv", inventoryRoute)
+
+// Utilities routes
+app.get("/", utilities.handleErrors(baseController.buildHome))
+
+/*  THIS DOESN'T ACTUALLY BELONG HERE  */
 app.get('/db/test', (req, res) => {    
   const pool = new Pool({        
     user: process.env.DB_USER,        
@@ -43,6 +52,28 @@ app.get('/db/test', (req, res) => {
     }    
   });
 });
+
+
+/************************
+* Express Error Handler
+* Place after all other middleware
+*************************/
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav()
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  let message = err.status == 404 ? err.message : 'Oh no! There was a crash. Maybe try a different route?'
+  res.render("errors/error", {
+      title: err.status || 'Server Error',
+      message,
+      nav
+  });
+});
+
+// File Not Found Route - must be last route in list
+app.use(async (req, res, next) => {
+  next({status: 404, message: 'Oopsy daisy, we appear to have lost that page.'})
+})
+
 
 
 /* ***********************
