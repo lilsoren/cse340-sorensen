@@ -27,4 +27,4 @@ if (process.env.NODE_ENV.toLowerCase().includes('dev')) {
 };
 } else {    // We are in production, so we can just export the pool object directly.    
   module.exports = pool;
-    }
+}

@@ -145,6 +145,48 @@ body{
 
 
 
+@media (min-width: 1200px) {
+    body{
+        flex-direction: row;
+
+        #vehicle-display {
+            flex-direction: row;
+            align-items: flex-start;
+            width: 50%; // Adjust as necessary
+            margin-right: 20px;
+            width: 48%;
+
+            img {
+                margin-bottom: 0;
+                margin-right: 20px; // Space between image and text
+            }
+
+            h2 {
+                margin: 10px 0;
+            }
+
+            span {
+                display: inline; // Display inline for desktop
+                margin: 0 10px; // Space between spans
+            }
+        }
+
+        // Additional Styles for the Right Side
+        .vehicle-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+             // Center the content vertically
+        }
+
+        h2{
+            
+        }
+    }
+}
+    
+
+    
 
 
 
