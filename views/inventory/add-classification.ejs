@@ -1,0 +1,25 @@
+<title><%= title %></title>
+
+<main>
+    <h1><%- title %></h1>
+    <%= messages() %>
+
+    <!-- Form for adding new classification -->
+    <form action="/inv/add-classification" method="POST" onsubmit="return validateForm()">
+        <label for="classificationName"><b>Classification Name</b></label>
+        <input 
+          type="text" 
+          name="classificationName" 
+          required 
+          placeholder="Enter a classification name"
+          value="<%= locals.classificationName || '' %>"
+        >
+        <p class="instructions">The classification name cannot contain spaces or special characters.</p>
+
+        <button type="submit">Add Classification</button>
+    </form>
+
+</main>
+
+
+<!-- pattern="/^[a-zA-Z0-9]+$/" -->

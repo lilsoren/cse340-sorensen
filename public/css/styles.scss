@@ -1,5 +1,182 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Righteous&display=swap');
 
+/* Add Inventory View */
+.addInventoryView {
+  
+  // Style the body to center content
+  body.addInventoryView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9; // Light background for the whole page
+  }
+  
+  // Main form container
+  .addInventory {
+    background-color: #fff; // White background for the form
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; // Limit width to make the form not too wide
+    margin: auto;
+    
+    // Title styling
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  
+    // Style the form labels
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+  
+    // Style the input fields
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+      
+      // Styling for placeholders
+      &::placeholder {
+        color: #aaa;
+      }
+  
+      // Focus effect for inputs
+      &:focus {
+        border-color: #007bff; // Blue border on focus
+        outline: none;
+      }
+    }
+  
+    // Optional: Button style
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff; // Button color
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #0056b3; // Darker blue on hover
+      }
+    }
+  
+    // Message area styling (optional, if you use messages() function)
+    .messages {
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: #eaf1fc;
+      border: 1px solid #b3d7f1;
+      color: #31708f;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+  
+}
+
+.registerView{
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-top: 20px;
+    }
+    
+    .container {
+        max-width: 400px;
+        margin: 20px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+    
+    .registerLink {
+        text-align: center;
+    }
+    
+    button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    /* Alert styles */
+    .alert {
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+    }
+    
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+    
+}
+
 /*  Mobile View */
 @media only screen and (max-width:999px){
     .deloreanSection{
@@ -47,6 +224,7 @@ nav{
         min-height: 30px;
         list-style: none;
         padding-top: 10px;
+        
     }
     a{
     text-decoration: none;
@@ -178,20 +356,8 @@ body{
             justify-content: space-between;
              // Center the content vertically
         }
-
-        h2{
-            
-        }
     }
 }
-    
-
-    
-
-
-
-
-
 
 
 

@@ -1,0 +1,15 @@
+<title><%- title%></title>
+
+<!-- flash messages -->
+<%- messages() %>
+
+ <!-- EJS code block to display errors -->
+ <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+      <%  }) %>
+    </ul>
+    <% } %>
+
+<h1>Congradulations, you have logged in!</h1>

@@ -1,1 +1,321 @@
-@import"https://fonts.googleapis.com/css2?family=Playfair+Display&family=Righteous&display=swap";@media only screen and (max-width: 999px){.deloreanSection{max-width:75%}.deloreanSection .deloreanImage{max-width:100%}.homeMain{display:grid;grid-template-columns:1fr;padding-bottom:60px;gap:20px}}a{text-decoration:none;color:#000}.siteName{display:flex;justify-content:space-between;padding:1em}.siteName .siteTitle{font-size:xx-large}.siteName .myAccount{transform:translateY(20%)}nav{margin-left:5px;margin-right:5px;background-color:#000}nav ul{display:flex;justify-content:space-around;min-height:30px;list-style:none;padding-top:10px}nav a{text-decoration:none;color:#fff}body{margin-left:20%;margin-right:20%;background-image:url("/images/site/pexels-guiirossi-1668928.jpg");background-size:cover}body .bodyContainer{background-color:#fff;border-color:#f9bc7d;border-style:solid;border-width:medium;border-radius:10px;max-width:983px}body .bodyContainer main{padding:10px}body .bodyContainer main .deloreanSection{min-height:100px}body .bodyContainer main .deloreanSection div{position:absolute;margin-left:2%;margin-top:2%;background-color:hsla(0,0%,100%,.5);text-align:center;border-radius:5%}body .bodyContainer main .deloreanSection div img{max-width:75%}body .bodyContainer main .deloreanSection .deloreanImage{width:max-content;padding-top:20px;padding-bottom:50px;margin-left:15%}body .bodyContainer main .homeMain{display:grid;grid-template-columns:50% 50%;padding-bottom:60px;gap:20px}body .bodyContainer main .homeMain .upgradesGrid{display:grid;grid-template-columns:50% 50%;grid-template-rows:50% 50%;align-items:center}body .bodyContainer main .homeMain .upgradesGrid p{background-color:hsla(0,0%,100%,.5);text-decoration:underline;color:blue}body .bodyContainer main .homeMain .upgradesGrid .upgradesGridItem{margin:10px;min-height:150px;text-align:center}body .bodyContainer main .homeMain .upgradesGrid .upgradesGridItem .upgradeImg{background-color:#f9bc7d;min-height:100px;display:flex;justify-content:center}body .bodyContainer main .homeMain .upgradesGrid .upgradesGridItem .upgradeImg img{height:50%;margin-top:11%}body .bodyContainer main .homeMain .reviews{display:flex;flex-direction:column}body .bodyContainer main .homeMain .reviews h2{padding:10px}body .bodyContainer main .homeMain .reviews div{display:flex;flex-direction:column;justify-content:space-between;flex-grow:1;padding-bottom:60px}body .bodyContainer footer{padding-left:10px}@media(min-width: 1200px){body{flex-direction:row}body #vehicle-display{flex-direction:row;align-items:flex-start;width:50%;margin-right:20px;width:48%}body #vehicle-display img{margin-bottom:0;margin-right:20px}body #vehicle-display h2{margin:10px 0}body #vehicle-display span{display:inline;margin:0 10px}body .vehicle-details{display:flex;flex-direction:column;justify-content:space-between}}/*# sourceMappingURL=styles.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Righteous&display=swap");
+/* Add Inventory View */
+.addInventoryView body.addInventoryView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f9;
+}
+.addInventoryView .addInventory {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+.addInventoryView .addInventory h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+.addInventoryView .addInventory label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+.addInventoryView .addInventory input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.addInventoryView .addInventory input::-moz-placeholder {
+  color: #aaa;
+}
+.addInventoryView .addInventory input:-ms-input-placeholder {
+  color: #aaa;
+}
+.addInventoryView .addInventory input::placeholder {
+  color: #aaa;
+}
+.addInventoryView .addInventory input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+.addInventoryView .addInventory button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.addInventoryView .addInventory button:hover {
+  background-color: #0056b3;
+}
+.addInventoryView .addInventory .messages {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #eaf1fc;
+  border: 1px solid #b3d7f1;
+  color: #31708f;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.registerView {
+  /* Alert styles */
+}
+.registerView body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+.registerView h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+}
+.registerView .container {
+  max-width: 400px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.registerView label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.registerView input[type=text],
+.registerView input[type=password],
+.registerView input[type=email] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.registerView input[type=text]:focus,
+.registerView input[type=password]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+.registerView .registerLink {
+  text-align: center;
+}
+.registerView button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.registerView button:hover {
+  background-color: #0056b3;
+}
+.registerView .alert {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+.registerView .alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+.registerView .alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/*  Mobile View */
+@media only screen and (max-width: 999px) {
+  .deloreanSection {
+    max-width: 75%;
+  }
+  .deloreanSection .deloreanImage {
+    max-width: 100%;
+  }
+  .homeMain {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column */
+    padding-bottom: 60px;
+    gap: 20px;
+  }
+}
+/* In gerneral */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Header */
+.siteName {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
+.siteName .siteTitle {
+  font-size: xx-large;
+}
+.siteName .myAccount {
+  transform: translateY(20%);
+}
+
+/* Nav */
+nav {
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: black;
+}
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  min-height: 30px;
+  list-style: none;
+  padding-top: 10px;
+}
+nav a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Body */
+body {
+  margin-left: 20%;
+  margin-right: 20%;
+  /*background-color: #D3D9D4;*/
+  background-image: url("/images/site/pexels-guiirossi-1668928.jpg");
+  background-size: cover;
+}
+body .bodyContainer {
+  background-color: white;
+  border-color: #F9BC7D;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 10px;
+  max-width: 983px;
+}
+body .bodyContainer main {
+  padding: 10px;
+}
+body .bodyContainer main .deloreanSection {
+  min-height: 100px;
+}
+body .bodyContainer main .deloreanSection div {
+  position: absolute;
+  margin-left: 2%;
+  margin-top: 2%;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  border-radius: 5%;
+}
+body .bodyContainer main .deloreanSection div img {
+  max-width: 75%;
+}
+body .bodyContainer main .deloreanSection .deloreanImage {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  margin-left: 15%;
+}
+body .bodyContainer main .homeMain {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding-bottom: 60px;
+  gap: 20px;
+}
+body .bodyContainer main .homeMain .upgradesGrid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+  align-items: center;
+}
+body .bodyContainer main .homeMain .upgradesGrid p {
+  background-color: rgba(255, 255, 255, 0.5);
+  text-decoration: underline;
+  color: blue;
+}
+body .bodyContainer main .homeMain .upgradesGrid .upgradesGridItem {
+  margin: 10px;
+  min-height: 150px;
+  text-align: center;
+}
+body .bodyContainer main .homeMain .upgradesGrid .upgradesGridItem .upgradeImg {
+  background-color: #F9BC7D;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+}
+body .bodyContainer main .homeMain .upgradesGrid .upgradesGridItem .upgradeImg img {
+  height: 50%;
+  margin-top: 11%;
+}
+body .bodyContainer main .homeMain .reviews {
+  display: flex;
+  flex-direction: column;
+}
+body .bodyContainer main .homeMain .reviews h2 {
+  padding: 10px;
+}
+body .bodyContainer main .homeMain .reviews div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding-bottom: 60px;
+}
+body .bodyContainer footer {
+  padding-left: 10px;
+}
+
+@media (min-width: 1200px) {
+  body {
+    flex-direction: row;
+  }
+  body #vehicle-display {
+    flex-direction: row;
+    align-items: flex-start;
+    width: 50%;
+    margin-right: 20px;
+    width: 48%;
+  }
+  body #vehicle-display img {
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+  body #vehicle-display h2 {
+    margin: 10px 0;
+  }
+  body #vehicle-display span {
+    display: inline;
+    margin: 0 10px;
+  }
+  body .vehicle-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}/*# sourceMappingURL=styles.css.map */

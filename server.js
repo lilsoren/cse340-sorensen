@@ -5,6 +5,9 @@
 /* ***********************
  * Require Statements
  *************************/
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const pool = require('./database/');
 const expressLayouts = require('express-ejs-layouts');
 const express = require("express");
 const env = require("dotenv").config();
@@ -13,7 +16,37 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/");
+const accountRoute = require('./routes/accountRoute');
+const bodyParser = require("body-parser");
 
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
+// Make the body-parser available to the application
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+app.use(cookieParser())
+
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates    ROUTES
@@ -29,10 +62,13 @@ app.get("/", baseController.buildHome);
 // Inventory routes
 app.use("/inv", inventoryRoute);
 
+// Account routes
+app.use('/account', accountRoute);
+
 // Utilities routes
 app.get("/", utilities.handleErrors(baseController.buildHome));
 
-// File Not Found Route - must be last route in list
+// 404 Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Oopsy daisy, we appear to have lost that page.'})
 });
@@ -44,17 +80,17 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+
+  // Check if the error has a specific status (e.g., 404 or 500)
   let message = err.status == 404 ? err.message : 'Oh no! There was a crash. Maybe try a different route?'
+
+  // Render the error page with the status and message
   res.render("errors/error", {
       title: err.status || 'Server Error',
       message,
       nav
   });
 });
-
-
-
-
 
 /* ***********************
  * Local Server Information

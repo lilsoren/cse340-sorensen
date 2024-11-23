@@ -1,0 +1,110 @@
+<title><%= title %></title>
+<h1><%- title %></h1>
+<link rel="stylesheet" href="/css/styles.css">
+
+<body class="addInventoryView">
+    <main class="addInventory">
+        <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+              <% errors.array().forEach(error => { %>
+              <li><%= error.msg %></li>
+              <%  }) %>
+            </ul>
+            <% } %>
+
+        <!-- Form for adding new classification -->
+        <form action="/inv/add-inventory" method="POST">
+            <label for="inventoryClass"><b>Choose a classification</b></label>
+            <%- classificationListHtml %>
+            <!-- HELP ME TIE LOCALS.INENTORYCLASS TO THE SELECTION IN CLASSIFICATIONLISTHTML -->
+
+
+            <label for="inventoryMake">Make</label>
+            <input 
+            type="text" 
+            name="inventoryMake" 
+            required 
+            placeholder="Min of 3 characters"
+            value="<%= locals.inventoryMake || '' %>"
+            >
+            <br>
+
+            <label for="inventoryModel">Model</label>
+            <input 
+            type="text"
+            name="inventoryModel"
+            required
+            placeholder="Min of 3 characters"
+            value="<%= locals.inventoryModel || '' %>"
+            >
+            <br>
+
+            <label for="inventoryImg">Image Path</label>
+            <input 
+            type="text"
+            name="inventoryImg"
+            required
+            placeholder=""
+            value="<%= locals.inventoryImg || '' %>"
+            >
+            <br>
+
+
+            <label for="inventoryThum">Thumbnail Path</label>
+            <input 
+            type="text"
+            name="inventoryThum"
+            required
+            placeholder=""
+            value="<%= locals.inventoryThum || '' %>"
+            >
+            <br>
+
+
+            <label for="inventoryPrice">Price</label>
+            <input 
+            type="text"
+            pattern="^\d+([.]\d+)?$"
+            name="inventoryPrice"
+            required
+            placeholder="decimal or integer"
+            value="<%= locals.inventoryPrice || '' %>"
+            >
+            <br>    
+
+            <label for="inventoryYear">Year</label>
+            <input 
+            type="text"
+            pattern="[0-9]{4"
+            name="inventoryYear"
+            required
+            placeholder="4 digit year"
+            value="<%= locals.inventoryYear || '' %>"
+            >
+            <br>
+
+            <label for="inventoryMiles">Miles</label>
+            <input 
+            type="text"
+            pattern="[0-9]*"
+            name="inventoryMiles"
+            required
+            placeholder="digits only"
+            value="<%= locals.inventoryMiles %>"
+            >
+            <br>
+
+            <label for="inventoryColor">Color</label>
+            <input type="text"
+            name="inventoryColor"
+            required
+            placeholder=""
+            value="<%= locals.inventoryColor %>"
+            >
+
+            <button type="submit">Add Car</button>
+        </form>
+    </main>
+</body>
+
