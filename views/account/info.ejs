@@ -12,4 +12,10 @@
     </ul>
     <% } %>
 
-<h1>Congradulations, you have logged in!</h1>
+<h2>Welcome, <%= firstName %>!</h2>
+<a href="/account/update">Update Profile</a>
+
+<% if (accountType === "Admin" || accountType === "Employee") { %>
+  <h3>Manage inventory with the link below</h3>
+  <a href="/inv/management">Manage Inventory</a>
+  <% } %>

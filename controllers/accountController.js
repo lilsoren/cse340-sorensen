@@ -9,7 +9,6 @@ require("dotenv").config()
 * *************************************** */
 async function buildLogin(req, res, next) {
     let nav = await utilities.getNav()
-    //req.flash("success_message", "This is a success login message.")
     res.render("account/login", {
       title: "Login",
       nav,
@@ -83,6 +82,7 @@ async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { email, psw } = req.body
   const accountData = await accountModel.getAccountByEmail(email)
+
   if (!accountData) {
    req.flash("notice", "Please check your credentials and try again.")
    res.status(400).render("account/login", {
@@ -91,17 +91,21 @@ async function accountLogin(req, res) {
     errors: null,
     email,
    })
-  return
+  //return
   }
   try {
    if (await bcrypt.compare(psw, accountData.account_password)) {
    delete accountData.account_password
+
+   req.session.user = accountData
+
    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
    if(process.env.NODE_ENV === 'development') {
      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
      } else {
        res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
      }
+
    return res.redirect("/account/")
    }
   } catch (error) {
@@ -114,11 +118,37 @@ async function accountLogin(req, res) {
 * *************************************** */
 async function buildAccount(req, res, next) {
   let nav = await utilities.getNav()
+
+  // Make sure the user is logged in (check session or JWT token)
+  if (!req.session.user) {
+
+    // Redirect to login if user is not logged in
+    return res.redirect('/account/login') 
+  }
+  
+  const firstName = req.session.user.account_firstname
+  const accountType = req.session.user.account_type;
+
   res.render("account/info", {
     title: "Info",
+    nav,
+    errors: null,
+    firstName,
+    accountType
+  })
+}
+
+/* ****************************************
+*  Deliver Update Account View
+* *************************************** */
+async function buildUpdate(req, res, next) {
+  let nav = await utilities.getNav()
+
+  res.render("account/update", {
+    title: "Update Account",
     nav,
     errors: null
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccount }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccount, buildUpdate }

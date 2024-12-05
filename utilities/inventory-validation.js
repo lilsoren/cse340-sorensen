@@ -78,9 +78,8 @@ validate.inventoryRules = () => {
  * Check data and return errors or continue to add inventory
  * ***************************** */
 validate.checkInventoryData = async (req, res, next) => {
-  console.log("It got to check Inventory Data")
   console.log("Body in check inv rules", req.body)
-  let classificationListHtml = await utilities.buildClassificationList();
+  let classificationList = await utilities.buildClassificationList();
   const errors = validationResult(req); // Check for validation errors
   
   if (!errors.isEmpty()) {
@@ -88,12 +87,43 @@ validate.checkInventoryData = async (req, res, next) => {
     let nav = await utilities.getNav();
     const locals = req.body; // Retain form data so the user doesn't lose their input
 
-    res.render("inventory/add-inventory", {
+    res.render("inventory/edit-inventory", {
       title: "Add New Vehicle",
       nav,
       errors, // Display errors
       locals, // Retain input values
-      classificationListHtml
+      classificationList
+    });
+    return; // Stop further processing
+  }
+  
+  next(); // If no validation errors, proceed to the next middleware
+};
+
+/* ******************************
+ * Errors will be directed back to the edit view
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  console.log("It got to check update Data")
+  console.log("Body in check inv rules", req.body)
+  let classificationList = await utilities.buildClassificationList();
+  const errors = validationResult(req); // Check for validation errors
+  
+  if (!errors.isEmpty()) {
+    // If there are errors, render the add-inventory page with error messages
+    let nav = await utilities.getNav();
+    const locals = req.body; // Retain form data so the user doesn't lose their input
+    const inv_id = req.body.inv_id; 
+
+    console.log("Paul ", locals)
+
+    res.render("inventory/management", {
+      title: "Edit Inventory View",
+      nav,
+      errors, // Display errors
+      locals, // Retain input values
+      classificationList, 
+      inv_id
     });
     return; // Stop further processing
   }

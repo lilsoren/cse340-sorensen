@@ -87,5 +87,55 @@ async function addInventory(car) {
   }
 }
 
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+async function updateInventory(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory};
+  console.log("classification_id is ......", classification_id);
+  try {
+    const sql =
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_image = $3, inv_thumbnail = $4, inv_price = $5, inv_year = $6, inv_miles = $7, inv_color = $8, classification_id = $9 WHERE inv_id = $10 RETURNING *"
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id
+    ])
+    return data.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+/* ***************************
+ *  Delete Inventory Data
+ * ************************** */
+async function deleteInventory(inv_id) {
+  try {
+    const sql = "DELETE FROM public.inventory WHERE inv_id = $1"
+    const data = await pool.query(sql, [inv_id])
+    return data // before this had a [0]  aftr the data so check that if there are errors
+  } catch (error) {
+    console.error("Delete Inventory Error: " + error)
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory, updateInventory, deleteInventory};

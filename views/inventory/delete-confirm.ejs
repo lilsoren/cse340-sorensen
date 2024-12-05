@@ -14,16 +14,14 @@
             <% } %>
 
         <!-- Form for adding new classification -->
-        <form id= "updateForm" action="/inv/update" method="POST">
-            <label for="inventoryClass"><b>Choose a classification</b></label>
-            <%- classificationList %>
-
+        <form id= "updateForm" action="/inv/delete/:inv_id" method="POST">
 
             <label for="inv_make">Make</label>
             <input 
             type="text" 
             name="inv_make" 
             required 
+            readonly
             placeholder="Min of 3 characters"
             value="<%= locals.inv_make %>"
             >
@@ -34,32 +32,11 @@
             type="text"
             name="inventoryModel"
             required
+            readonly
             placeholder="Min of 3 characters"
             value="<%= locals.inv_model || '' %>"
             >
             <br>
-
-            <label for="inventoryImg">Image Path</label>
-            <input 
-            type="text"
-            name="inventoryImg"
-            required
-            placeholder=""
-            value="<%= locals.inv_image || '' %>"
-            >
-            <br>
-
-
-            <label for="inventoryThum">Thumbnail Path</label>
-            <input 
-            type="text"
-            name="inventoryThum"
-            required
-            placeholder=""
-            value="<%= locals.inv_thumbnail || '' %>"
-            >
-            <br>
-
 
             <label for="inventoryPrice">Price</label>
             <input 
@@ -67,6 +44,7 @@
             pattern="^\d+([.]\d+)?$"
             name="inventoryPrice"
             required
+            readonly
             placeholder="decimal or integer"
             value="<%= locals.inv_price || '' %>"
             >
@@ -78,31 +56,14 @@
             pattern="[0-9]{4"
             name="inventoryYear"
             required
+            readonly
             placeholder="4 digit year"
             value="<%= locals.inv_year || '' %>"
             >
             <br>
 
-            <label for="inventoryMiles">Miles</label>
-            <input 
-            type="text"
-            pattern="[0-9]*"
-            name="inventoryMiles"
-            required
-            placeholder="digits only"
-            value="<%= locals.inv_miles %>"
-            >
-            <br>
-
-            <label for="inventoryColor">Color</label>
-            <input type="text"
-            name="inventoryColor"
-            required
-            placeholder=""
-            value="<%= locals.inv_color %>"
-            >
-
-            <button disabled type="submit">Add Vehicle</button>
+            <p>Confirm Deletion - The delete is permanent.</p>
+            <button type="submit">Delete Vehicle</button>
             <input type="hidden" name="inv_id"
             <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
             <% } %>>

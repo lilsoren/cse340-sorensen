@@ -5,9 +5,19 @@
     <%- messages() %>
 
     <!-- Links to add new classification and new inventory -->
-    <a href="/inv/add-classification">Add new classification</a>
+    <a href="/inv/add-classification">Add New classification</a>
     <br>
-    <a href="/inv/add-inventory">Add new inventory</a>
+    <a href="/inv/add-inventory">Add New Vehicle</a>
+    <br>
+    <h2>Manage Inventory</h2>
+    <br>
+    <p>Select from list to see the items belonging to that classification</p>
+    <%- classificationList %>
+    <br>
+    <table id="inventoryDisplay"></table>
+    <noscript>JavaScript must be enabled to use this page.</noscript>
 
 </main>
+
+<script src="../../js/inventory.js"></script>
 

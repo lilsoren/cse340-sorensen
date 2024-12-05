@@ -67,7 +67,6 @@ Util.buildClassificationGrid = async function(data){
 Util.buildVehicleGrid = async function(data){
   let grid
   let v = data[0]
-  console.log(v)
   if(data.length > 0){
     // grid = '<div id="vehicle-display">'
       grid +=  '<a href="../../inv/detail/'+ v.inv_id 
@@ -146,6 +145,26 @@ Util.checkLogin = (req, res, next) => {
     next()
   } else {
     req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
+/* ****************************************
+* Middleware to Check Account Type
+**************************************** */
+Util.checkAccountType = (req, res, next) => {
+  if (req.cookies.jwt) {
+    const userInfo = jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET)
+    const userType = userInfo.account_type
+    if (userType == "Employee" || userType == "Admin") {
+      return next()
+    } else {
+      req.flash("notice", "Must be an employee or admin to access administrative permissions.")
+      return res.redirect("/account/login")
+    }
+  } else {
     return res.redirect("/account/login")
   }
  }

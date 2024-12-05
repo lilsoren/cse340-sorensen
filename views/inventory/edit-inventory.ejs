@@ -102,11 +102,13 @@
             value="<%= locals.inv_color %>"
             >
 
-            <button disabled type="submit">Add Vehicle</button>
+            <button disabled type="submit">Update Vehicle</button>
             <input type="hidden" name="inv_id"
             <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
             <% } %>>
         </form>
     </main>
+
+    <script src="/js/inv-update.js"></script>
 </body>
 

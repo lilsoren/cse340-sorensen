@@ -40,5 +40,13 @@ router.post(
     utilities.handleErrors(accountController.processAccount)
 )
 
+router.get("/logout", (req, res) => {
+    res.clearCookie("jwt")
+    res.redirect("/")
+})
+
+router.get("/update", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdate))
+//router.post("/update", utilities.checkLogin, utilities.handleErrors(accountController.updateAccount))
+
 // Export the router
 module.exports = router; 
