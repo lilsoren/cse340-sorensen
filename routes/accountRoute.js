@@ -45,8 +45,10 @@ router.get("/logout", (req, res) => {
     res.redirect("/")
 })
 
-router.get("/update", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdate))
-//router.post("/update", utilities.checkLogin, utilities.handleErrors(accountController.updateAccount))
+router.get("/update/:id", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdate))
+router.post("/update", utilities.checkLogin, utilities.handleErrors(accountController.updateAccount))
+//router.get("/update/:id", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdatePassword))
+router.post("/update/password", utilities.checkLogin, utilities.handleErrors(accountController.updateAccountPassword))
 
 // Export the router
 module.exports = router; 

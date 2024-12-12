@@ -7,3 +7,20 @@
     <%# messages() %>
     
     <%- grid %>
+
+    <form id= "updateForm" action="/inv/details/review" method="POST">
+        <lable for="review_text">add a review</lable><br>
+        <input type="text" name="review_text"
+         name=""
+         required
+         placeholder="Enter review here"
+         value="<%= locals.review_text%>">
+    
+        <button disabled type="submit">Submit Review</button>
+        <input type="hidden" name="vehicle_id"
+        <% if(locals.vehicle_id) { %> value="<%= locals.vehicle_id %>"
+            <% } %>>
+    </form>  
+    <script src="/js/inv-update.js"></script>
+
+    <%- reviews %>

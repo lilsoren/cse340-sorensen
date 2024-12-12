@@ -65,7 +65,7 @@ Util.buildClassificationGrid = async function(data){
 * Build the vehicle view HTML
 * ************************************ */
 Util.buildVehicleGrid = async function(data){
-  let grid
+  let grid = ''
   let v = data[0]
   if(data.length > 0){
     // grid = '<div id="vehicle-display">'
@@ -84,7 +84,23 @@ Util.buildVehicleGrid = async function(data){
       grid += '<br />'
       grid += '<span><b>Miles:</b> ' + new Intl.NumberFormat('en-US').format(v.inv_miles) + '</span>'    
       // grid += '</h2>'
-    // grid += '</div>'
+  //  grid += // grid += '</div>'
+    // grid += '    <form id= "updateForm" action="/inv/details/review" method="POST">'
+    // grid += '<lable for="review_text">add a review</lable><br>'
+    // grid += '<input type="text" name="review_text"'
+    // grid +=' name=""'
+    // grid +=' required'
+    // grid +=' placeholder="Enter review here"'
+    // //grid += 'value="<%= locals.review_text%>"'
+
+    // grid +=' >'
+
+    // // submit button
+    // grid += '<button disabled type="submit">Submit Review</button>'
+    // grid += '<input type="hidden" name="vehicle_id"  <% if(locals.account_id) { %> value="<%= locals.account_id %>"<% } %>'
+    // grid += '</form>'    
+    // grid +='<script src="/js/inv-update.js"></script>'
+
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
@@ -168,6 +184,14 @@ Util.checkAccountType = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+Util.buildReviewList = async function (reviews) {
+  let html = ""
+  for (let i = 0; i < reviews.length; i++) {
+       html += `<p><strong>${reviews[i].review_text}:</strong> ${reviews[i].account_firstname} ${reviews[i].account_lastname}</p>`
+     }
+     return html
+}
 
 module.exports = Util
 

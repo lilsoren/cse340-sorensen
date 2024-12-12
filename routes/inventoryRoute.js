@@ -29,10 +29,8 @@ router.post('/add-classification', utilities.checkAccountType,
 router.get('/edit-inventory', utilities.checkAccountType, utilities.handleErrors(invController.showAddInventoryForm));
 
 // Route to handle form submission in add-inventory form
-router.post('/edit-inventory', utilities.checkAccountType,
-    inventoryValidation.inventoryRules(),
-    inventoryValidation.checkInventoryData,
-    utilities.handleErrors(invController.addInventory)
+router.post('/edit-inventory', utilities.checkAccountType, inventoryValidation.inventoryRules(), inventoryValidation.checkInventoryData,
+utilities.handleErrors(invController.addInventory)
 );
 
 // Route to build the add inventory page
@@ -47,8 +45,12 @@ router.get("/edit/:inv_id", utilities.checkAccountType, utilities.handleErrors(i
 // Route that matches the edit-inventory's submit button action attribute
 router.post("/update/", utilities.checkAccountType, utilities.handleErrors(invController.updateInventory));
 
+// Route to build and deliver the delete inventory view
 router.get("/delete/:inv_id", utilities.checkAccountType, utilities.handleErrors(invController.deleteInventoryView))
 router.post("/delete/:inv_id", utilities.checkAccountType, utilities.handleErrors(invController.deleteInventory))
 
+
+// Im not sure if I need this route or not Paul
+router.post("/details/review", utilities.checkLogin, utilities.handleErrors(invController.addReview))
 
 module.exports = router;

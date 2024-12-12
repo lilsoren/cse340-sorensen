@@ -201,17 +201,61 @@ a{
   }
 
 /* Header */
-.siteName{
+.siteName {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1em;
-    .siteTitle{
-        font-size:xx-large;
+  
+    .siteTitle {
+      font-size: xx-large;
+      font-weight: bold;
+      color: #333;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
     }
-    .myAccount{
-        transform: translateY(20%)
+  
+    /* Grouping these links together */
+    .viewProfile,
+    .logOut,
+    .myAccount {
+      font-size: 1rem;
+      color: #0073e6;
+      text-decoration: none;
+  
+      &:hover {
+        text-decoration: underline;
+      }
     }
-  } 
+  
+    // Ensure "viewProfile" and "logOut" are next to each other without space
+    &.loggedIn {
+      display: flex; // Flex layout to keep them next to each other
+      justify-content: flex-end; // Align the links to the right
+      align-items: center; // Vertically center the links
+    }
+  
+    // Add space only between siteTitle and viewProfile
+    .siteTitle + .viewProfile {
+      margin-left: 2rem; /* Adjust this value to control the space between siteTitle and viewProfile */
+    }
+  
+    // Mobile responsiveness: stack the links if needed
+    @media (max-width: 768px) {
+      flex-direction: column; // Stack the links on small screens
+      align-items: flex-start; // Align the items to the start (left-aligned)
+  
+      .viewProfile,
+      .logOut {
+        margin-right: 0; // Remove right margin when stacking
+        margin-bottom: 10px; // Space out the links when stacked
+      }
+    }
+  }
+  
 
 /* Nav */
 nav{

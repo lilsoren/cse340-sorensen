@@ -22,15 +22,22 @@ invCont.buildByClassificationId = async function (req, res, next) {
  *  Build vehicle details page
  * ************************** */
 invCont.buildVehicleDetails = async function (req, res, next) {
-  const vehicle_id = req.params.vehicleId
+  const vehicle_id = parseInt(req.params.vehicleId)
+  console.log(vehicle_id)
   const data = await invModel.getVehicleById(vehicle_id)
   const grid = await utilities.buildVehicleGrid(data)
+   //const reviews = await invCont.buildReviewList(vehicle_id)
+  const reviewsList = await invModel.getReviewByVehicleId(vehicle_id)
+  const reviews = await utilities.buildReviewList(reviewsList)
+
   let nav = await utilities.getNav()
   const vehicleName = data[0].inv_year + " " + data[0].inv_make + " " + data[0].inv_model
   res.render("./inventory/vehicle", {
     title: vehicleName,
     nav,
     grid,
+    reviews,
+    vehicle_id,       
   })
 }
 
@@ -152,7 +159,6 @@ invCont.getInventoryJSON = async (req, res, next) => {
    const itemData = (await invModel.getVehicleById(inv_id))[0]
    const classificationList = await utilities.buildClassificationList(itemData.classification_id)
    const itemName = `${itemData.inv_make} ${itemData.inv_model}`
-   console.log(itemData.inv_make)
    res.render("./inventory/edit-inventory", {
      title: "Edit " + itemName,
      nav,
@@ -256,30 +262,8 @@ invCont.deleteInventoryView = async function (req, res, next) {
  * ************************** */
 invCont.deleteInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
-  const {
-    inv_id,
-    // inv_make,
-    // inventoryModel,
-    // inventoryImg,
-    // inventoryThum,
-    // inventoryPrice,
-    // inventoryYear,
-    // inventoryMiles,
-    // inventoryColor,
-    // inventoryClass,
-  } = req.body
-  const updateResult = await invModel.deleteInventory(
-    inv_id,
-    // inv_make,
-    // inventoryModel,
-    // inventoryImg,
-    // inventoryThum,
-    // inventoryPrice,
-    // inventoryYear,
-    // inventoryMiles,
-    // inventoryColor,
-    // inventoryClass,
-  )
+  const {inv_id} = req.body
+  const updateResult = await invModel.deleteInventory(inv_id)
 
   if (updateResult) {
     const itemName = updateResult.inv_make + " " + updateResult.inventoryModel
@@ -294,18 +278,82 @@ invCont.deleteInventory = async function (req, res, next) {
     nav,
     classificationList: classificationList,
     errors: null,
-    inv_id,
-    // inv_make,
-    // inventoryModel,
-    // inventoryImg,
-    // inventoryThum,
-    // inventoryPrice,
-    // inventoryYear,
-    // inventoryMiles,
-    // inventoryColor,
-    // inventoryClass,
+    inv_id
     })
   }
 }
+
+/* ***************************
+ *  Build vehicle details page
+ * ************************** */
+// invCont.buildReviewList = async function (req, res, next) {
+//   const data = await invModel.getReviewByVehicleId(vehicle_id)
+//   let html = ""
+//   for (let i = 0; i < data.length; i++) {
+//     console.log("html is", html)
+//     html += `<p><strong>${data[i].review_text}:</strong> ${data[i].account_firstname} ${data[i].account_lastname}</p>`
+//   }
+  
+//   return html
+// }
+
+/* ***************************
+ *  Add a review form
+ * ************************** */
+// invCont.addReview = async function (req, res, next) {
+//   const { review_text, account_firstname, account_lastname } = req.body;
+//   try {
+//     const review = {
+//       review: review_text,
+//       firstName: account_firstname,
+//       localStorageName: account_lastname
+//     };
+//     // Assuming the validation happens in middleware now
+//     await invModel.addReview(review); 
+//     req.flash("success", "Your review has been recorded!");
+//     res.redirect("/inv/detail/:vehicleId"); 
+//   } catch (error) {
+//     req.flash("errors", "Failed to add review: " + error.message);
+//     res.redirect("/inv/detail/:vehicleId"); 
+//   }
+// };
+
+invCont.addReview = async function (req, res, next) {
+  console.log(req.session.user)
+  const account_id = req.session.user.account_id
+  const account_firstname = req.session.user.account_firstname
+  const account_lastname = req.session.user.account_lastname
+
+  const { vehicle_id, review_text, created_at} = req.body;
+  // vehicle_id = parseInt(vehicle_id);
+  console.log("req.body", req.body)
+  console.log("id", vehicle_id)
+  if (!review_text){
+    console.log("error at add Review")
+    req.flash("errors", "review_text and created_at fields are required");
+    return res.redirect(`/inv/detail/${vehicle_id}`);
+  }
+
+  try {
+    const success = await invModel.addReview(
+      vehicle_id,
+      account_id,
+      review_text,
+      //created_at: created_at,  // assuming the format is 'YYYY-MM-DD HH:MM:SS'
+    );
+
+    if (success){
+      req.flash("success", "Your review has been recorded!");
+    }
+    else{
+      req.flash("errors", "Failed to add review.");
+    }
+    res.redirect(`/inv/detail/${vehicle_id}`); 
+  } catch (error) {
+    console.error("Error adding review:", error);
+    req.flash("errors", "Failed to add review: " + error.message);
+    res.redirect(`/inv/detail/${vehicle_id}`); 
+  }
+};
 
 module.exports = invCont 

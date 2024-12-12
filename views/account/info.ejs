@@ -13,7 +13,7 @@
     <% } %>
 
 <h2>Welcome, <%= firstName %>!</h2>
-<a href="/account/update">Update Profile</a>
+<a href="/account/update/<%= id %>">Update Profile</a>
 
 <% if (accountType === "Admin" || accountType === "Employee") { %>
   <h3>Manage inventory with the link below</h3>

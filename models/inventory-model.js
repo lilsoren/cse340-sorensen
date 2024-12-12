@@ -138,4 +138,39 @@ async function deleteInventory(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory, updateInventory, deleteInventory};
+/* ***************************
+ *  Get Vehicle Review Data
+ * ************************** */
+async function getReviewByVehicleId(inv_id){
+  try {
+    const sql = "SELECT r.*, account_firstname, account_lastname FROM public.review r inner join public.account a on r.account_id = a.account_id  WHERE inv_id = $1 ORDER BY created_at DESC"
+    const data = await pool.query(sql, [inv_id])
+    return data.rows
+  } catch (error) {
+    console.error("getReviewByVehicleId error: " + error)
+  }
+}
+
+/* ***************************
+ *  Add Review Data
+ * ************************** */
+async function addReview(inv_id, account_id, review_text) {
+  try {
+    // Insert the new review into the database
+    const query= `
+      INSERT INTO public.review (inv_id, account_id, review_text) 
+      VALUES ($1, $2, $3) 
+      RETURNING review_id`;
+
+      const values = [inv_id, account_id, review_text]
+      const result = await pool.query(query, values);
+      console.log("result is ", result.rows[0])
+      return result.rows[0];
+  } catch (error) {
+    console.error("Error adding review " + error);
+    throw error;
+  }
+}
+
+
+module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory, updateInventory, deleteInventory, getReviewByVehicleId, addReview};

@@ -2,8 +2,8 @@
 <h1><%- title %></h1>
 <link rel="stylesheet" href="/css/styles.css">
 
-<body class="updateView">
-    <main class="aInventory">
+<body class="updateAccountView">
+    <main class="updateAccount">
         <%- messages() %>
         <% if (errors) { %>
             <ul class="notice">
@@ -13,102 +13,61 @@
             </ul>
             <% } %>
 
-        <!-- Form for adding new classification -->
-        <form id= "updateForm" action="/inv/update" method="POST">
-            <label for="inventoryClass"><b>Choose a classification</b></label>
-            <%- classificationList %>
-
-
-            <label for="inv_make">Make</label>
+        <!-- Form for updating account information -->
+        <form id= "updateForm" action="/account/update" method="POST">
+           
+            <label for="account_firstname">First Name</label>
             <input 
             type="text" 
-            name="inv_make" 
+            name="account_firstname" 
             required 
-            placeholder="Min of 3 characters"
-            value="<%= locals.inv_make %>"
+            value="<%= locals.account_firstname %>"
             >
             <br>
 
-            <label for="inventoryModel">Model</label>
+            <label for="account_lastname">Last Name</label>
             <input 
             type="text"
-            name="inventoryModel"
+            name="account_lastname"
             required
-            placeholder="Min of 3 characters"
-            value="<%= locals.inv_model || '' %>"
+            value="<%= locals.account_lastname || '' %>"
             >
             <br>
 
-            <label for="inventoryImg">Image Path</label>
+            <label for="account_email">Email</label>
             <input 
             type="text"
-            name="inventoryImg"
+            name="account_email"
             required
             placeholder=""
-            value="<%= locals.inv_image || '' %>"
+            value="<%= locals.account_email || '' %>"
             >
             <br>
 
+            <button disabled type="submit">Update Account</button>
+            <input type="hidden" name="account_id"
+            <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+            <% } %>>
+        </form>
 
-            <label for="inventoryThum">Thumbnail Path</label>
+        <!-- Form for updating password -->
+        <form id= "updatePassword" action="/account/update/password" method="POST">
+           
+            <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+
+            <label for="account_password">New Password</label>
             <input 
-            type="text"
-            name="inventoryThum"
-            required
-            placeholder=""
-            value="<%= locals.inv_thumbnail || '' %>"
-            >
+            type="password"
+            name="account_password"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
             <br>
 
-
-            <label for="inventoryPrice">Price</label>
-            <input 
-            type="text"
-            pattern="^\d+([.]\d+)?$"
-            name="inventoryPrice"
-            required
-            placeholder="decimal or integer"
-            value="<%= locals.inv_price || '' %>"
-            >
-            <br>    
-
-            <label for="inventoryYear">Year</label>
-            <input 
-            type="text"
-            pattern="[0-9]{4"
-            name="inventoryYear"
-            required
-            placeholder="4 digit year"
-            value="<%= locals.inv_year || '' %>"
-            >
-            <br>
-
-            <label for="inventoryMiles">Miles</label>
-            <input 
-            type="text"
-            pattern="[0-9]*"
-            name="inventoryMiles"
-            required
-            placeholder="digits only"
-            value="<%= locals.inv_miles %>"
-            >
-            <br>
-
-            <label for="inventoryColor">Color</label>
-            <input type="text"
-            name="inventoryColor"
-            required
-            placeholder=""
-            value="<%= locals.inv_color %>"
-            >
-
-            <button disabled type="submit">Update Vehicle</button>
-            <input type="hidden" name="inv_id"
-            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <button type="submit">Update Account</button>
+            <input type="hidden" name="account_id"
+            <% if(locals.account_id) { %> value="<%= locals.account_id %>"
             <% } %>>
         </form>
     </main>
-
     <script src="/js/inv-update.js"></script>
 </body>
 
